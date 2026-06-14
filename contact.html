@@ -64,7 +64,7 @@
       event.preventDefault();
 
       const formData = new FormData(contactForm);
-      const getField = (fieldName) => (formData.get(fieldName) ?? '').toString().trim();
+      const getField = (fieldName) => (formData.get(fieldName) || '').toString().trim();
       const name = getField('name');
       const email = getField('email');
       const phone = getField('phone');
@@ -72,13 +72,16 @@
 
       const subject = encodeURIComponent('New Contact Request From Website');
       const body = encodeURIComponent(
-        'Full Name: ' + name + '\n' +
-        'Email Address: ' + email + '\n' +
-        'Phone Number: ' + (phone || 'Not provided') + '\n\n' +
-        'Message:\n' + message
+        `Full Name: ${name}
+Email Address: ${email}
+Phone Number: ${phone || 'Not provided'}
+
+Message:
+${message}`
       );
+
       window.location.href = 'mailto:' + contactEmail + '?subject=' + subject + '&body=' + body;
-      formStatus.textContent = 'Opening your email app with a drafted message. If it does not open, email us directly at ' + contactEmail + '.';
+      formStatus.textContent = `Opening your email app with a drafted message. If it does not open, email us directly at ${contactEmail}.`;
     });
   </script>
 </body>

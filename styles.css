@@ -198,6 +198,13 @@ body {
   background: var(--green-900);
 }
 
+.form-status {
+  max-width: 640px;
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: var(--green-700);
+}
+
 .footer {
   background: var(--green-900);
   color: var(--white);

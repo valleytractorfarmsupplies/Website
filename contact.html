@@ -83,11 +83,14 @@ ${message}`
       const mailtoLink = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
       const emailLink = document.createElement('a');
       emailLink.href = mailtoLink;
+      emailLink.target = '_blank';
+      emailLink.rel = 'noopener noreferrer';
       emailLink.style.display = 'none';
       document.body.appendChild(emailLink);
       emailLink.click();
       document.body.removeChild(emailLink);
-      formStatus.textContent = `Opening your email app with a drafted message. If it does not open, email us directly at ${contactEmail}.`;
+
+      formStatus.textContent = `Attempting to open your email client with a drafted message. If it does not open, email us directly at ${contactEmail}.`;
     });
   </script>
 </body>

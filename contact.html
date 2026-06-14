@@ -81,23 +81,14 @@ ${message}`
       );
 
       const mailtoLink = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-      let openedInNewTab = false;
-
-      try {
-        const draftWindow = window.open(mailtoLink, '_blank', 'noopener,noreferrer');
-        openedInNewTab = !!draftWindow;
-      } catch (error) {
-        openedInNewTab = false;
-      }
-
-      if (!openedInNewTab) {
-        const emailLink = document.createElement('a');
-        emailLink.href = mailtoLink;
-        emailLink.style.display = 'none';
-        document.body.appendChild(emailLink);
-        emailLink.click();
-        document.body.removeChild(emailLink);
-      }
+      const emailLink = document.createElement('a');
+      emailLink.href = mailtoLink;
+      emailLink.target = '_blank';
+      emailLink.rel = 'noopener noreferrer';
+      emailLink.style.display = 'none';
+      document.body.appendChild(emailLink);
+      emailLink.click();
+      document.body.removeChild(emailLink);
 
       formStatus.textContent = `Attempting to open your email client with a drafted message. If it does not open, email us directly at ${contactEmail}.`;
     });

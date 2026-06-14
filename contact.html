@@ -84,8 +84,8 @@ ${message}`
       let openedInNewTab = false;
 
       try {
-        const draftWindow = window.open(mailtoLink, '_blank', 'noopener');
-        openedInNewTab = !!draftWindow && !draftWindow.closed;
+        const draftWindow = window.open(mailtoLink, '_blank', 'noopener,noreferrer');
+        openedInNewTab = !!draftWindow;
       } catch (error) {
         openedInNewTab = false;
       }

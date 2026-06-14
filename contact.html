@@ -63,9 +63,7 @@
       event.preventDefault();
 
       const formData = new FormData(contactForm);
-      const getField = function (fieldName) {
-        return (formData.get(fieldName) || '').toString().trim();
-      };
+      const getField = (fieldName) => (formData.get(fieldName) ?? '').toString().trim();
       const name = getField('name');
       const email = getField('email');
       const phone = getField('phone');
@@ -78,10 +76,9 @@
         'Phone Number: ' + (phone || 'Not provided') + '\n\n' +
         'Message:\n' + message
       );
-
       window.location.href = 'mailto:valleytractorfarmsupplies@gmail.com?subject=' + subject + '&body=' + body;
-      formStatus.textContent = 'We tried to open your email app with your drafted message.';
-      contactForm.reset();
+      window.location.href = 'mailto:valleytractorfarmsupplies@gmail.com?subject=' + subject + '&body=' + body;
+      formStatus.textContent = 'Opening your email app with a drafted message. If it does not open, email us directly at valleytractorfarmsupplies@gmail.com.';
     });
   </script>
 </body>

@@ -26,9 +26,7 @@
   <main class="page-main">
     <section class="section">
       <h2>Send a Message</h2>
-      <form class="contact-form" action="https://formsubmit.co/valleytractorfarmsupplies@gmail.com" method="post">
-        <input type="hidden" name="_subject" value="New Contact Request From Website">
-        <input type="hidden" name="_captcha" value="false">
+      <form class="contact-form" id="contactForm">
 
         <label for="name">Full Name</label>
         <input id="name" name="name" type="text" required>
@@ -42,8 +40,9 @@
         <label for="message">Message</label>
         <textarea id="message" name="message" rows="6" required></textarea>
 
-        <button type="submit" class="btn">Send Message</button>
+        <button type="submit" class="btn">Open Email Draft</button>
       </form>
+      <p class="form-status" id="formStatus" aria-live="polite"></p>
     </section>
   </main>
 
@@ -56,5 +55,40 @@
     </div>
     <p class="footer-copy">&copy; 2026 Valley Tractor Farm Supplies. All rights reserved.</p>
   </footer>
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const contactEmail = 'valleytractorfarmsupplies@gmail.com';
+
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const getField = (fieldName) => (formData.get(fieldName) || '').toString().trim();
+      const name = getField('name');
+      const email = getField('email');
+      const phone = getField('phone');
+      const message = getField('message');
+
+      const subject = encodeURIComponent('New Contact Request From Website');
+      const body = encodeURIComponent(
+        `Full Name: ${name}
+Email Address: ${email}
+Phone Number: ${phone || 'Not provided'}
+
+Message:
+${message}`
+      );
+
+      const mailtoLink = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+      const emailLink = document.createElement('a');
+      emailLink.href = mailtoLink;
+      emailLink.style.display = 'none';
+      document.body.appendChild(emailLink);
+      emailLink.click();
+      document.body.removeChild(emailLink);
+      formStatus.textContent = `Opening your email app with a drafted message. If it does not open, email us directly at ${contactEmail}.`;
+    });
+  </script>
 </body>
 </html>

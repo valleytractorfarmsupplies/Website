@@ -81,13 +81,18 @@ ${message}`
       );
 
       const mailtoLink = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-      const emailLink = document.createElement('a');
-      emailLink.href = mailtoLink;
-      emailLink.style.display = 'none';
-      document.body.appendChild(emailLink);
-      emailLink.click();
-      document.body.removeChild(emailLink);
-      formStatus.textContent = `Opening your email app with a drafted message. If it does not open, email us directly at ${contactEmail}.`;
+      const draftWindow = window.open(mailtoLink, '_blank', 'noopener');
+
+      if (!draftWindow) {
+        const emailLink = document.createElement('a');
+        emailLink.href = mailtoLink;
+        emailLink.style.display = 'none';
+        document.body.appendChild(emailLink);
+        emailLink.click();
+        document.body.removeChild(emailLink);
+      }
+
+      formStatus.textContent = `Trying to open your drafted message in a new tab (or your email app). If it does not open, email us directly at ${contactEmail}.`;
     });
   </script>
 </body>

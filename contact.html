@@ -63,10 +63,13 @@
       event.preventDefault();
 
       const formData = new FormData(contactForm);
-      const name = (formData.get('name') || '').toString().trim();
-      const email = (formData.get('email') || '').toString().trim();
-      const phone = (formData.get('phone') || '').toString().trim();
-      const message = (formData.get('message') || '').toString().trim();
+      const getField = function (fieldName) {
+        return (formData.get(fieldName) || '').toString().trim();
+      };
+      const name = getField('name');
+      const email = getField('email');
+      const phone = getField('phone');
+      const message = getField('message');
 
       const subject = encodeURIComponent('New Contact Request From Website');
       const body = encodeURIComponent(
@@ -77,7 +80,7 @@
       );
 
       window.location.href = 'mailto:valleytractorfarmsupplies@gmail.com?subject=' + subject + '&body=' + body;
-      formStatus.textContent = 'Your email app should open with your drafted message.';
+      formStatus.textContent = 'We tried to open your email app with your drafted message.';
       contactForm.reset();
     });
   </script>

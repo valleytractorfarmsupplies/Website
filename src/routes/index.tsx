@@ -18,10 +18,6 @@ function Home() {
   return (
     <SiteLayout>
       <section className="relative">
-        <div className="absolute inset-0">
-          <img src={hero} alt="Tractor working in the Sigatoka valley" width={1920} height={1080} className="size-full object-cover" />
-          <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
-        </div>
         <div className="relative max-w-6xl mx-auto px-6 py-32 sm:py-44 text-primary-foreground">
           <p className="uppercase tracking-[0.3em] text-xs mb-4 text-accent">Sigatoka · Fiji Islands</p>
           <h1 className="font-display text-5xl sm:text-7xl max-w-3xl leading-[1.05]">

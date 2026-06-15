@@ -3,20 +3,10 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 
-import tractorImg from "@/assets/gallery-tractor.jpg";
-import hosesImg from "@/assets/gallery-hoses.jpg";
-import engineImg from "@/assets/gallery-engine.jpg";
-import plowImg from "@/assets/gallery-plow.jpg";
-import fertilizerImg from "@/assets/gallery-fertilizer.jpg";
-import toolsImg from "@/assets/gallery-tools.jpg";
-
 const items = [
-  { src: tractorImg, alt: "Tractor in the valley", label: "Tractors" },
-  { src: hosesImg, alt: "Heavy-duty farm hoses", label: "Hoses & Fittings" },
-  { src: engineImg, alt: "Engine block", label: "Engines & Parts" },
-  { src: plowImg, alt: "Tillage equipment", label: "Tillage & Plows" },
-  { src: fertilizerImg, alt: "Fertilizer and seeds", label: "Fertilizer & Seeds" },
-  { src: toolsImg, alt: "Hand farm tools", label: "Tools & Equipment" },
+  { src: "/images/Tractor.jpg", label: "Tractors" },
+  { src: "/images/Hoses.jpg", label: "Hoses & Fittings" },
+  { src: "/images/generator.jpg", label: "Engines & Parts" },
 ];
 
 export const Route = createFileRoute("/gallery")({
@@ -54,7 +44,6 @@ function GalleryPage() {
             >
               <img
                 src={item.src}
-                alt={item.alt}
                 loading="lazy"
                 width={800}
                 height={600}

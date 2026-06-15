@@ -4,9 +4,9 @@ import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 
 const items = [
-  { src: "/images/Tractor.jpg", label: "Tractors" },
-  { src: "/images/Hoses.jpg", label: "Hoses & Fittings" },
-  { src: "/images/generator.jpg", label: "Engines & Parts" },
+  { src: "@/images/Tractor.jpg", label: "Tractors" },
+  { src: "@/images/Hoses.jpg", label: "Hoses & Fittings" },
+  { src: "@/images/generator.jpg", label: "Engines & Parts" },
 ];
 
 export const Route = createFileRoute("/gallery")({

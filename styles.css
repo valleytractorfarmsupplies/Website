@@ -391,3 +391,22 @@ body {
   align-items: center;
   text-decoration: none;
 }
+
+.hero-image-section {
+  width: 100%;
+  padding: 20px clamp(12px, 4vw, 60px);
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.hero-image-section img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  margin: 0 auto;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}

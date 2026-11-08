@@ -2,25 +2,25 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-
-const items = [
-  { src: "@/images/Tractor.jpg", label: "Tractors" },
-  { src: "@/images/Hoses.jpg", label: "Hoses & Fittings" },
-  { src: "@/images/generator.jpg", label: "Engines & Parts" },
-];
+import { ProductCard } from "@/components/ProductCard";
+import { products, type Product } from "@/data/products";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
   head: () => ({
     meta: [
       { title: "Gallery — Valley Tractor & Farm Supplies" },
-      { name: "description", content: "See examples of tractors, parts, tools and farm supplies available at Valley Tractor & Farm Supplies in Sigatoka, Fiji." },
+      {
+        name: "description",
+        content:
+          "See examples of tractors, parts, tools and farm supplies available at Valley Tractor & Farm Supplies in Sigatoka, Fiji.",
+      },
     ],
   }),
 });
 
 function GalleryPage() {
-  const [lightbox, setLightbox] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<Product | null>(null);
 
   return (
     <SiteLayout>
@@ -30,31 +30,14 @@ function GalleryPage() {
             Our Products
           </h1>
           <p className="text-muted-foreground text-base sm:text-lg">
-            A look at some of the tractors, parts, tools and supplies we carry.
-            Stop by the shop to see the full range.
+            A look at some of the tractors, parts, tools and supplies we carry. Stop by the shop to
+            see the full range.
           </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => setLightbox(item.src)}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card text-left shadow-soft transition-shadow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <img
-                src={item.src}
-                loading="lazy"
-                width={800}
-                height={600}
-                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-4 pb-4 pt-10">
-                <span className="font-display text-sm font-semibold text-white drop-shadow">
-                  {item.label}
-                </span>
-              </div>
-            </button>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} onSelect={setLightbox} />
           ))}
         </div>
       </section>
@@ -74,11 +57,17 @@ function GalleryPage() {
             <X className="size-5" />
           </button>
           <img
-            src={lightbox}
-            alt="Full view"
+            src={lightbox.image}
+            alt={lightbox.name}
             className="max-h-[85vh] max-w-full rounded-lg object-contain shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-md bg-black/70 px-4 py-2 text-center text-white">
+            <p className="font-display font-semibold">{lightbox.name}</p>
+            <p className="text-xs font-bold uppercase tracking-wide text-white/80">
+              {lightbox.available ? "Available" : "Not available"}
+            </p>
+          </div>
         </div>
       )}
     </SiteLayout>
